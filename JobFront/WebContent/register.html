@@ -1,0 +1,74 @@
+<style>
+/* Credit to bootsnipp.com for the css for the color graph */
+.colorgraph {
+	height: 5px;
+	border-top: 0;
+	background: #c4e17f;
+	border-radius: 5px;
+	background-image: -webkit-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%,
+		#f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%,
+		#db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%,
+		#669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+	background-image: -moz-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%,
+		#f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%,
+		#db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%,
+		#669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+	background-image: -o-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca
+		25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe
+		50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1
+		87.5%, #62c2e4 87.5%, #62c2e4);
+	background-image: linear-gradient(to right, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca
+		25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe
+		50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1
+		87.5%, #62c2e4 87.5%, #62c2e4);
+}
+</style>
+<div class="container" ng-controller="rcontroller as rc">
+
+	<div class="row">
+		<div
+			class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+			<form ng-submit="rc.submit()" method="post">
+				<h2>
+					Please Sign Up <small>It's free and always will be.</small>
+				</h2>
+				<hr class="colorgraph">
+				<div class="form-group">
+					<input type="email" name="emailid" id="emailid"
+						class="form-control input-lg" placeholder="EmailId" tabindex="1"
+						ng-model="rc.customer.emailId">
+				</div>
+				<div class="form-group">
+					<input type="text" name="full_name" id="Full_name"
+						class="form-control input-lg" placeholder="Full Name" tabindex="2"
+						ng-model="rc.customer.name">
+				</div>
+				<div class="form-group">
+					<input type="text" name="phno" id="phno"
+						class="form-control input-lg" placeholder="Mobile Number"
+						tabindex="3" ng-model="rc.customer.phoneNo">
+				</div>
+				<div class="form-group">
+					<input type="password" name="upassword" id="upassword"
+						class="form-control input-lg" placeholder="Password" tabindex="4"
+						ng-model="rc.customer.password">
+				</div>
+				<div class="form-group">
+					<select class="form-control input-lg" ng-model="rc.customer.role">
+					<option value="">Select a Value</option>
+					<option value="Student">Student</option>
+					<option value="Employee">Employee</option>
+					<option value="Employer">Employer</option>
+					</select>
+				</div>
+				<hr class="colorgraph">
+				<div class="row">
+					<div class="col-xs-12 col-md-6">
+						<input type="submit" value="Register"
+							class="btn btn-primary btn-block btn-lg" tabindex="8">
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

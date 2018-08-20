@@ -1,0 +1,57 @@
+<style>
+.transparent .tuyin 
+	{
+	margin-top: 20px; 
+	background-color: rgba(255, 255, 255, 0.37);
+	border: 1px solid #F7F7F7;
+	border-radius: 5px;
+	box-shadow: 0px 0px 2px 0px rgba(181, 181, 181, 0.3);
+	padding: 4%;
+	text-align: center;
+	width: 97%;
+	min-height: 315px;
+	position: relative;
+	margin-bottom: 25px;
+	 }
+.transparent .tuyin .title 
+	{
+	text-align: center; 
+	color: #FFF;
+	font-size: 49px; 
+	}
+.transparent .tuyin .plan-name 
+	{
+	font-size: 20px;
+	font-weight: 400;
+	border-bottom: 1px solid #FFF;
+	padding-bottom: 15px;
+	padding: 10px
+	}
+
+.transparent .tuyin .text
+	{
+	margin-top: 20px; 
+	color: #474747;
+	font-weight: 300;
+	margin-bottom: 13px; 
+	font-size: 16px;
+	text-align: justify;
+	}
+
+</style>
+<div class="container" ng-controller="bcontroller as bc">
+  <div class="row transparent" ng-repeat="vblog in bc.blogs">
+    <div class="col-md-12">
+    	  <div class="tuyin first">	
+			<span class="title">{{vblog.blogTitle}}</span>
+			 <div class="plan-name">Author:<span>{{vblog.author}}</span>
+			 <br/>Date:<span>{{vblog.createdOn}}</span></div>
+			  <div class="text">
+				<p>{{vblog.blogDescription}}</p>
+			  </div>
+			<button type="button" class="btn btn-default" ng-click="bc.selectoneblog(vblog.blogId)">Comment  <span class="glyphicon glyphicon-pencil"></span> </button>
+		  </div>
+		</div>
+  </div>
+  
+</div> 

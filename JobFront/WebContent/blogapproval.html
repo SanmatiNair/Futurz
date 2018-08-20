@@ -1,0 +1,42 @@
+<style>
+.custab {
+	border: 1px solid #ccc;
+	padding: 5px;
+	margin: 5% 0;
+	box-shadow: 3px 3px 2px #ccc;
+	transition: 0.5s;
+}
+
+.custab:hover {
+	box-shadow: 3px 3px 0px transparent;
+	transition: 0.5s;
+}
+</style>
+<div class="container" >
+	<div class="row">
+		<table class="table table-striped custab" ng-controller="acontroller as ac">
+			<thead>
+				<tr>
+					<th>Blog Title</th>
+					<th>Blog Description</th>
+					<th>Blog Author</th>
+					<th class="text-center">Accept</th>
+					<th class="text-center">Reject</th>
+					
+				</tr>
+			</thead>
+			<tr ng-repeat="ablog in ac.blogs">
+				<td>{{ablog.blogTitle}}</td>
+				<td style="text-align: justify;">{{ablog.blogDescription}}</td>
+				<td>{{ablog.author}}</td>
+				<td class="text-center"><a class='btn btn-info btn-xs' href=""ng-click="ac.approveblog(ablog.blogId)"><span
+						class="glyphicon glyphicon-edit"></span>Approve</a> </td>
+						<td><a href="" ng-click="ac.deleteblog(ablog.blogId)"
+					class="btn btn-danger btn-xs" ><span
+						class="glyphicon glyphicon-remove"></span>Reject</a></td>
+					
+			</tr>
+			
+		</table>
+	</div>
+</div>
