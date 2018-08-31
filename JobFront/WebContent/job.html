@@ -1,0 +1,49 @@
+<div class="container" ng-controller="jcontroller as jc">
+	<div
+		class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+		<form class="form-signin" ng-submit="jc.submit()" method="post">
+			
+			<div class="form-group">
+				<label class="control-label">Enter Job Title</label> <input
+					type="text" name="jobTitle" id="jobTitle"class="form-control" placeholder="Job Title"
+					required ng-model="jc.job.jobTitle">
+			</div>
+			<div class="form-group">
+				<label class="control-label">Enter Job Description</label> <textarea type="text"
+					name="jobDescription" id="jobDescription" class="form-control" placeholder="Job Description" required ng-model="jc.job.jobDescription"></textarea>
+			</div>
+			<div class="form-group">
+				<label class="control-label">Enter Company Name</label> <input
+					name="companyName" id="companyName" type="text" class="form-control" placeholder="Company Name"
+					required ng-model="jc.job.companyName">
+			</div>
+			<div class="form-group">
+				<label class="control-label">Enter Skills Required</label> <input
+					name="skillsRequired" id="skillsRequired" type="text" class="form-control" placeholder="Skills Required"
+					required ng-model="jc.job.skillsRequired">
+			</div>
+			<div class="form-group">
+				<label class="control-label">Enter Location</label> <input
+					name="location" id="location" type="text" class="form-control" placeholder="Location"
+					required ng-model="jc.job.location">
+			</div>
+			<div class="form-group">
+				<label class="control-label">Enter Salary</label> <input
+					name="salary" id="salary" type="text" class="form-control" placeholder="Salary"
+					required ng-model="jc.job.salary">
+			</div>
+			<div class="form-group">
+				<label class="control-label">Enter Experience</label> <input
+					name="experience" id="experience" type="text" class="form-control" placeholder="Experience"
+					required ng-model="jc.job.experience">
+			</div>
+			<div class="form-group">
+				<label class="control-label">Enter Vacancies</label> <input
+					name="vacancies" id="vacancies" type="text" class="form-control" placeholder="Vacancies"
+					required ng-model="jc.job.vacancies">
+			</div>
+						<button class="btn button " type="submit">Add Job</button>
+			<br>
+		</form>
+	</div>
+</div>

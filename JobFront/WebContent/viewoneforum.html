@@ -1,0 +1,102 @@
+<style>
+.transparent .tuyin {
+	margin-top: 20px;
+	background-color: rgba(255, 255, 255, 0.37);
+	border: 1px solid #F7F7F7;
+	border-radius: 5px;
+	box-shadow: 0px 0px 2px 0px rgba(181, 181, 181, 0.3);
+	padding: 4%;
+	text-align: center;
+	width: 97%;
+	position: relative;
+	margin-bottom: 25px;
+}
+
+.transparent .tuyin .title {
+	text-align: center;
+	color: #FFF;
+	font-size: 49px;
+}
+
+.transparent .tuyin .plan-name {
+	font-size: 20px;
+	font-weight: 400;
+	border-bottom: 1px solid #FFF;
+	padding-bottom: 15px;
+	padding: 10px
+}
+
+.transparent .tuyin .text {
+	margin-top: 20px;
+	color: #474747;
+	font-weight: 300;
+	margin-bottom: 13px;
+	font-size: 16px;
+	text-align: justify;
+}
+/* Credit to bootsnipp.com for the css for the color graph */
+.colorgraph {
+	height: 5px;
+	border-top: 0;
+	background: #c4e17f;
+	border-radius: 5px;
+	background-image: -webkit-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%,
+		#f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%,
+		#db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%,
+		#669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+	background-image: -moz-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%,
+		#f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%,
+		#db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%,
+		#669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+	background-image: -o-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca
+		25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe
+		50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1
+		87.5%, #62c2e4 87.5%, #62c2e4);
+	background-image: linear-gradient(to right, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca
+		25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe
+		50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1
+		87.5%, #62c2e4 87.5%, #62c2e4);
+}
+</style>
+<div class="container" ng-controller="fcontroller as fc">
+	<div class="row transparent">
+		<div class="col-md-12">
+			<div class="tuyin first">
+				<span class="title">{{fc.oforum.forumTitle}}</span>
+				<span class="text">{{fc.oforum.forumDescription}}</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+		<hr class="colorgraph">
+		<h3>Comments:</h3>
+			<form ng-submit="fc.submitComment()" method="post">
+				<div class="row">
+					<div class="form-group col-md-11">
+						<textarea name="BlogComment" id="BlogComment"
+							class="form-control input-lg" placeholder="BlogComment"
+							tabindex="2" ng-model="fc.forumComment.content" ></textarea>
+					</div>
+					<div class="col-md-1">
+						<input type="submit" value="Post"
+							class="btn btn-primary btn-block btn-lg" tabindex="5">
+					</div>
+				</div>
+				<hr class="colorgraph">
+
+			</form>
+		</div>
+	</div>
+	<div class="row transparent" ng-show="fc.forumComments!=''" >
+		<div class="col-md-12">
+			<div class="tuyin first" ng-repeat="fcc in fc.forumComments">
+				<span class="text">{{fc.contentt}}</span>
+				<div class="text">
+					Author:<span>{{fc.postedBy}}</span> <br />Date:<span>{{fc.postedOn}}</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
