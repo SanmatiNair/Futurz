@@ -5,6 +5,10 @@ app.factory('aservice',function($http)
 			displayblogs: displayblogs,
 			deleteblogs: deleteblogs,
 			approveblog: approveblog,
+			getalljobs: getalljobs,
+			deletejob: deletejob,
+			approvejob: approvejob
+			
 	};
 	return factory;
     function displayblogs() 
@@ -24,4 +28,23 @@ app.factory('aservice',function($http)
     	var REST_SERVICE_URL='http://localhost:8080/JobMiddle/Admin/BlogApprove/'+blogid;
         return $http.put(REST_SERVICE_URL);
     }
+    
+    
+    function getalljobs() 
+    {
+    	var url='http://localhost:8080/JobMiddle/Admin/jobs';
+        return $http.get(url);
+    }
+    function deletejob(id)
+    {
+    	var url="http://localhost:8080/JobMiddle/Admin/job/"+id;
+		return $http.delete(url);
+    } 
+    
+    function approvejob(id)
+    {
+    	var url="http://localhost:8080/JobMiddle/Admin/jobapprove/"+id;
+		return $http.put(url);
+    }
+    
  });

@@ -11,8 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.niit.JobBack.model.Customer;
 
 
-
-
 @Repository("CustomerDAO")
 @Transactional
 public class CustomerDAOImpl implements CustomerDAO {

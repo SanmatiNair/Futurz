@@ -62,12 +62,12 @@
 	<div class="row transparent">
 		<div class="col-md-12">
 			<div class="tuyin first">
-				<span class="title">{{bc.blog.blogTitle}}</span>
+				<span class="title">{{bc.sblog.blogTitle}}</span>
 				<div class="plan-name">
-					Author:<span>{{bc.blog.author}}</span> <br />Date:<span>{{bc.blog.createdOn}}</span>
+					Author:<span>{{bc.sblog.author}}</span> <br />Date:<span>{{bc.sblog.createdOn}}</span>
 				</div>
 				<div class="text">
-					<p>{{bc.blog.blogDescription}}</p>
+					<p>{{bc.sblog.blogDescription}}</p>
 				</div>
 			</div>
 		</div>
@@ -76,12 +76,12 @@
 		<div class="col-md-12">
 		<hr class="colorgraph">
 		<h3>Comments:</h3>
-			<form ng-submit="bc.submit()" method="post">
+			<form ng-submit="bc.submitComment()" method="post">
 				<div class="row">
 					<div class="form-group col-md-11">
 						<textarea name="BlogComment" id="BlogComment"
 							class="form-control input-lg" placeholder="BlogComment"
-							tabindex="2" ></textarea>
+							tabindex="2" ng-model="bc.blogComment.comment" ></textarea>
 					</div>
 					<div class="col-md-1">
 						<input type="submit" value="Post"
@@ -93,10 +93,13 @@
 			</form>
 		</div>
 	</div>
-	<div class="row transparent">
+	<div class="row transparent" ng-show="bc.blogComments!=''" >
 		<div class="col-md-12">
-			<div class="tuyin first">
-				<span class="title"></span>
+			<div class="tuyin first" ng-repeat="bcblog in bc.blogComments">
+				<span class="text">{{bcblog.comment}}</span>
+				<div class="text">
+					Author:<span>{{bcblog.authorname}}</span> <br />Date:<span>{{bcblog.postedOn}}</span>
+				</div>
 			</div>
 		</div>
 	</div>

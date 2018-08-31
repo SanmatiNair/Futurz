@@ -28,7 +28,7 @@ public class BlogDao implements IBlogDao {
 
 	public List<Blog> SelectAllBlog() {
 		try {
-			return sf.getCurrentSession().createQuery("from Blog where status="+true).list();
+			return sf.getCurrentSession().createQuery("from Blog where status="+true+" order by BlogId desc").list();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;

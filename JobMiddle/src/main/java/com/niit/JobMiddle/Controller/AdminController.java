@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.niit.JobBack.Dao.IBlogDao;
+import com.niit.JobBack.Dao.JobDAO;
 import com.niit.JobBack.model.Blog;
+import com.niit.JobBack.model.Job;
 
 @RestController
 @RequestMapping(value="Admin")
@@ -21,6 +23,9 @@ public class AdminController
 {
 	@Autowired
 	IBlogDao blogdao;
+	
+	@Autowired
+	JobDAO jobDAO;
 	
 	@GetMapping(value="/Blog")
 	public ResponseEntity<List<Blog>> getAllBlogs()
@@ -72,5 +77,43 @@ public class AdminController
 		}		
 	}
 	
+	
+	@GetMapping("/jobs")
+	public ResponseEntity<List<Job>> getAlljobs()
+	{
+	List<Job> jobs = jobDAO.selectUnapprovedJob();
+			if(jobs.isEmpty())
+	{
+		return new ResponseEntity<List<Job>>(jobs, HttpStatus.NO_CONTENT);
+	}
+	else
+	{
+		return new ResponseEntity<List<Job>>(jobs, HttpStatus.OK);
+	}
+	}
+	
+	@DeleteMapping("job/{id}")
+	public ResponseEntity<Void> deleteJob(@PathVariable("id") int id)
+	{
+	if(jobDAO.deleteJob(id)) {
+		return new ResponseEntity<Void>(HttpStatus.OK);
+	}else {
+		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+	}
+	}
+	
+	@PutMapping("jobapprove/{id}")
+	public ResponseEntity<Void> updateJob(@PathVariable("id") int id)
+	{
+		Job job = jobDAO.selectOneJob(id);
+		job.setStatus(true);
+		
+	if(jobDAO.createAndUpdateJob(job)) {
+		return new ResponseEntity<Void>(HttpStatus.OK);
+	}else {
+		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+	}
+	}
+
 	
 }

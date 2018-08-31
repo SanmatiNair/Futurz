@@ -7,23 +7,23 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-
 public class Forum {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
+	private int foid;
 	private String forumTitle;
 	
 	@Column(columnDefinition="text")
 	private String forumDescription;
 	
 	
-	public int getId() {
-		return id;
+
+	public int getFoid() {
+		return foid;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setFoid(int foid) {
+		this.foid = foid;
 	}
 	public String getForumTitle() {
 		return forumTitle;

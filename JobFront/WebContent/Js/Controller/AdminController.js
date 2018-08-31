@@ -9,6 +9,20 @@ angular.module('myApp').controller('acontroller', function($scope, aservice, $lo
 		        blogId: null,
 		        createdOn: null
 	};
+	
+	self.job = {
+			id: null,
+			jobTitle : '',
+			jobDescription : '',
+			companyName : '',
+			status : 'false',
+			skillsRequired : '',
+			location: '',
+			salary: '',
+			experience: '',
+			vacancies: null
+	};
+	
 	self.blogs=[];
 	displayblogs();
 	self.deleteblog=deleteblog;
@@ -24,7 +38,6 @@ angular.module('myApp').controller('acontroller', function($scope, aservice, $lo
 	
 	function deleteblog(blogid) 
 	{
-		alert("i am called");
 		aservice.deleteblogs(blogid).then(function(response) {
 			alert("Blog deleted successfully")
 			displayblogs();
@@ -43,6 +56,33 @@ angular.module('myApp').controller('acontroller', function($scope, aservice, $lo
 			alert('Blog not Approved');
 		})
 	}
+	
+	
+	function getalljobs() {
+		aservice.getalljobs().then(function(response) {
+			self.jobs = response.data;
+		}, function(response) {
+			alert('No job available');
+		})
+	}
+	
+	self.deletejob =function(id){
+		aservice.deletejob(id).then(function(response) {
+			getalljobs();
+		}, function(response) {
+			alert('Not deleted');
+		})
+	}
+	
+	self.approvejob =function(id){
+		aservice.approvejob(id).then(function(response) {
+			alert('job Approved');
+			getallblogs();
+		}, function(response) {
+			alert('Not approved');
+		})
+	}
+	getalljobs()
 	
 	
 })
