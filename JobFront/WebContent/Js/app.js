@@ -1,5 +1,5 @@
 var app = angular.module('myApp', ['ngRoute','ngCookies']);
-app.value('bid', {id : 27});
+app.value('bid', {id : 55});
 app.value('jid', {id : 1});
 app.value('foid', {id : 46});
 
@@ -29,6 +29,10 @@ app.config(function($routeProvider) {
     })
      .when("/viewoneblog", {
         templateUrl : "viewoneblog.html"
+    })
+    
+    .when("/viewmyblog", {
+        templateUrl : "viewmyblog.html"
     })
     
     .when("/forum", {
@@ -67,7 +71,7 @@ app
 						var isLoggedIn = $rootScope.usersingnedin;
 						var role = $rootScope.currentuser.role;
 						var studPages = [ '/blog', '/viewallblogs',
-								'/viewoneblog', '/viewallforums' ]
+								'/viewoneblog', '/viewallforums','/viewmyblog' ]
 						var empPages = [ '/viewalljobs', '/viewonejob' ]
 						var compPages = [ '/job' ]
 						var adminPages = [ '/jobapproval',

@@ -17,6 +17,7 @@ public class Blog {
 	@Column(columnDefinition="text")
 	private String BlogDescription;
 	private String Author;
+	private String Authoremail;
 	private	String CreatedOn;
 	private boolean status;
 
@@ -68,6 +69,14 @@ public class Blog {
 
 	public void setCreatedOn(String createdOn) {
 		CreatedOn = createdOn;
+	}
+
+	public String getAuthoremail() {
+		return Authoremail;
+	}
+
+	public void setAuthoremail(String authoremail) {
+		Authoremail = authoremail;
 	}
 	
 	

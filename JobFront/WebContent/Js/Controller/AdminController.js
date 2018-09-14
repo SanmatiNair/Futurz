@@ -48,7 +48,6 @@ angular.module('myApp').controller('acontroller', function($scope, aservice, $lo
 	
 	function approveblog(blogid) 
 	{
-		alert("i am called");
 		aservice.approveblog(blogid).then(function(response) {
 			alert("Blog Approved successfully")
 			displayblogs();

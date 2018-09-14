@@ -3,10 +3,12 @@ angular.module('myApp').controller(
 		function($scope, $route,bservice, $location, bid, $rootScope) {
 			var self = this;
 			self.blog = {
+			    blogId:0,
 				blogTitle : '',
 				blogDescription : '',
 				author : '',
-				status : 'false',
+				authoremail: '',
+				status : '',
 				createdOn : null
 			};
 			self.blogComment = {
@@ -16,6 +18,12 @@ angular.module('myApp').controller(
 				authorname : '',
 				postedOn : null,
 			};
+			self.likedislike={
+			dummyid:0,
+			blogId:0,
+			likecount:0,
+			dislikecount:0,
+			}
 			
 				
 
@@ -29,6 +37,7 @@ angular.module('myApp').controller(
 			viewoneblog()
 			viewallblogComments()
 
+
 			function createblog(blog) {
 				bservice.createblog(blog).then(function(response) {
 					alert('Blog Added Successfully ');
@@ -40,6 +49,8 @@ angular.module('myApp').controller(
 
 			function submit() {
 				self.blog.author = $rootScope.currentuser.name;
+				self.blog.authoremail = $rootScope.currentuser.emailId;
+				self.blog.status = 'false';
 				createblog(self.blog);
 			}
 
@@ -65,7 +76,8 @@ angular.module('myApp').controller(
 
 			function viewoneblog() {
 				bservice.viewoneblog(bid.id).then(function(response) {
-					self.sblog = response.data;
+					self.blog = response.data;		
+					viewmylike();
 				}, function(errResponse) {
 					alert('NO Blog Found');
 				})
@@ -98,5 +110,73 @@ angular.module('myApp').controller(
 			function resetComment() {
 				self.blogComment = null;
 			}
+			
+			
+			function viewmyblogs() {
+				bservice.viewmyblogs($rootScope.currentuser.emailId).then(function(response) {
+					self.myblogs = response.data;
+					viewmylike();
+				}, function(response) {
+					self.myblogs=null;
+				})
+				
+			}
+			
+			function viewmylike()
+			{
+				bservice.viewLikedislike(bid.id).then(function(response) {
+					self.likedislike = response.data;
+				}, function(response) 
+				{
+				self.likedislike=response.data;
+				})
+			}
+
+			self.editblog =function(id) {
+				bid.id=id;
+				$location.path("/blog")
+			}
+			
+			self.deleteblog =function(id) {
+				bservice.deleteblog(id).then(function(response) {
+					alert('blog deleted')
+					$route.reload();
+				}, function(errResponse) {
+					alert('NO Blog Found');
+				})
+			}
+			
+			self.deleteblogcomment =function(id) {
+				bservice.deleteblogcomment(id).then(function(response) {
+					alert('blogcomment deleted')
+					$route.reload();
+				}, function(errResponse) {
+					alert('NO Blogcomment Found');
+				})
+			}
+			
+			self.updatelike=function(id) 
+			{
+				self.likedislike.blogId=bid.id;
+				self.likedislike.likecount=(self.likedislike.likecount+1);
+				bservice.createbloglikedislike(self.likedislike).then(function(response) {
+					alert('Blog Added Successfully ');
+				}, function(errResponse) {
+					alert('Blog Not Added');
+				})
+			}
+			
+			self.updatedislike=function(id) 
+			{
+				self.likedislike.blogId=bid.id;
+				self.likedislike.dislikecount=(self.likedislike.dislikecount+1);
+				bservice.createbloglikedislike(self.likedislike).then(function(response) {
+					alert('Blog Added Successfully ');
+				}, function(errResponse) {
+					alert('Blog Not Added');
+				})
+			}
+			
+			viewmyblogs()
 
 		})
