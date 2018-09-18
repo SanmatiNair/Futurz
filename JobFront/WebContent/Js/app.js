@@ -1,5 +1,6 @@
 var app = angular.module('myApp', ['ngRoute','ngCookies']);
 app.value('bid', {id : 55});
+app.value('bed',{edit:false});
 app.value('jid', {id : 1});
 app.value('foid', {id : 46});
 
@@ -123,7 +124,7 @@ app
 						}
 
 					})
-	$rootScope.currentUser = $cookieStore.get('currentuser') || null;
+	$rootScope.currentuser = $cookieStore.get('currentuser') || null;
 	if ($rootScope.currentuser) {
 		$http.defaults.headers.common['Authorization'] = 'Basic'
 				+ $rootScope.currentuser;

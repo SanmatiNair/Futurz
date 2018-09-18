@@ -76,7 +76,7 @@ angular.module('myApp').controller('acontroller', function($scope, aservice, $lo
 	self.approvejob =function(id){
 		aservice.approvejob(id).then(function(response) {
 			alert('job Approved');
-			getallblogs();
+			getalljobs();
 		}, function(response) {
 			alert('Not approved');
 		})

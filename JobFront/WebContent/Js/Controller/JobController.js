@@ -1,4 +1,4 @@
-angular.module('myApp').controller('jcontroller', function($scope, jservice, $location, jid) {
+angular.module('myApp').controller('jcontroller', function($scope, jservice, $location, jid,$rootScope) {
 	var self = this;
 	self.job = {
 			id: null,
@@ -10,7 +10,8 @@ angular.module('myApp').controller('jcontroller', function($scope, jservice, $lo
 			location: '',
 			salary: '',
 			experience: '',
-			vacancies: null
+			vacancies: null,
+			email:''
 	};
 	
 	self.submit = submit;
@@ -26,6 +27,7 @@ angular.module('myApp').controller('jcontroller', function($scope, jservice, $lo
 	
 	function submit()
 	{
+		self.job.email=$rootScope.currentuser.emailId;
 		createjob(self.job);
 	}
 	

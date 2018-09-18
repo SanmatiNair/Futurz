@@ -1,37 +1,44 @@
 <div class="container" ng-controller="acontroller as ac">
-    <table class="table table-striped custab">
-    <thead>
-       <tr>
-           
-            <th>Job Title</th>
-            <th>Job Description</th>
-            <th>Company Name</th>
-            <th>Skills Required</th>
-            <th>Location</th>
-            <th>Salary</th>
-            <th>Experience</th>
-            <th>Vacancies</th>
-            <th>Approve</th>
-            <th >Reject</th>
-        </tr>
-    </thead>
-            <tr ng-repeat="j in ac.jobs">
-                
-                <td>{{j.jobTitle}}</td>
-                <td style="text-align: justify;">{{j.jobDescription}}</td>
-                <td>{{j.companyName}}</td>
-                <td>{{j.skillsRequired}}</td>
-                <td>{{j.location}}</td>
-                <td>{{j.salary}}</td>
-                <td>{{j.experience}}</td>
-                <td>{{j.vacancies}}</td>
-                <td class="text-center"><div class='btn btn-info btn-xs' ng-click="ac.approvejob(j.id)">
-                <span class="glyphicon glyphicon-edit"></span> Approve</div></td>
-                <td class="text-center">
-                 <div class="btn btn-danger btn-xs" ng-click="ac.deletejob(j.id)">
-                 <span class="glyphicon glyphicon-remove"></span> Reject</div></td>
-            </tr>
-           
-    </table>
-    </div>
+	<table class="table table-striped custab">
+		<thead>
+			<tr>
+
+				<th>Job Title</th>
+				<th>Job Description</th>
+				<th>Company Name</th>
+				<th>Skills Required</th>
+				<th>Location</th>
+				<th>Salary</th>
+				<th>Experience</th>
+				<th>Vacancies</th>
+				<th>Email</th>
+				<th>Approve</th>
+				<th>Reject</th>
+			</tr>
+		</thead>
+		<tr ng-repeat="j in ac.jobs">
+
+			<td>{{j.jobTitle}}</td>
+			<td style="text-align: justify;">{{j.jobDescription}}</td>
+			<td>{{j.companyName}}</td>
+			<td>{{j.skillsRequired}}</td>
+			<td>{{j.location}}</td>
+			<td>{{j.salary}}</td>
+			<td>{{j.experience}}</td>
+			<td>{{j.vacancies}}</td>
+			<td>{{j.email}}</td>
+
+			<td class="text-center"><div class='btn btn-info btn-xs'
+					ng-click="ac.approvejob(j.id)">
+					<span class="glyphicon glyphicon-edit"></span> Approve
+				</div></td>
+			<td class="text-center">
+				<div class="btn btn-danger btn-xs" ng-click="ac.deletejob(j.id)">
+					<span class="glyphicon glyphicon-remove"></span> Reject
+				</div>
+			</td>
+		</tr>
+
+	</table>
+</div>
 </div>

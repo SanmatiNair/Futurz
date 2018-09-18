@@ -8,7 +8,6 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.niit.JobBack.model.Job;
 import com.niit.JobBack.model.Notification;
 @Repository("notificationDAO")
 @Transactional
@@ -42,7 +41,7 @@ public class NotificationDAOImpl implements NotificationDAO {
 
 	public List<Notification> SelectAllNotification(String email) {
 		try {
-			return sf.getCurrentSession().createQuery("from Notification where status="+true).list();
+			return sf.getCurrentSession().createQuery("from Notification where emailId='"+email+"' and viewed=false").list();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
@@ -51,7 +50,7 @@ public class NotificationDAOImpl implements NotificationDAO {
 
 	public Notification selectNotification(int id) {
 		try {
-			return (Notification) sf.getCurrentSession().createQuery("from Notification where id="+id).uniqueResult();
+			return (Notification) sf.getCurrentSession().createQuery("from Notification where notificationId="+id).uniqueResult();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;

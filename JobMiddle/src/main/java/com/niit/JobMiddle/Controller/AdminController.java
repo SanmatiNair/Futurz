@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.niit.JobBack.Dao.IBlogDao;
 import com.niit.JobBack.Dao.JobDAO;
+import com.niit.JobBack.Dao.NotificationDAO;
 import com.niit.JobBack.model.Blog;
 import com.niit.JobBack.model.Job;
+import com.niit.JobBack.model.Notification;
 
 @RestController
 @RequestMapping(value="Admin")
@@ -26,6 +28,9 @@ public class AdminController
 	
 	@Autowired
 	JobDAO jobDAO;
+	
+	@Autowired
+	NotificationDAO notdao;
 	
 	@GetMapping(value="/Blog")
 	public ResponseEntity<List<Blog>> getAllBlogs()
@@ -46,10 +51,16 @@ public class AdminController
 	@DeleteMapping(value="/Blog/{id}")
 	public ResponseEntity<?> deleteBlog(@PathVariable("id") int id)
 	{
-		System.out.println("hi delete");
+		Blog blog = blogdao.SelectOneBlog(id);
 		
 		if(blogdao.DeleteBlog(id))
 		{
+			Notification n=new Notification();
+			n.setBlogTitle(blog.getBlogTitle());
+			n.setEmailId(blog.getAuthoremail());
+			n.setStatus("Rejected");
+			n.setViewed(false);
+			notdao.createandupdateNotification(n);
 			return new ResponseEntity<Void>(HttpStatus.OK);
 		}
 		else
@@ -69,6 +80,12 @@ public class AdminController
 		
 		if(blogdao.CreateAndUpdateBlog(blog))
 		{
+			Notification n=new Notification();
+			n.setBlogTitle(blog.getBlogTitle());
+			n.setEmailId(blog.getAuthoremail());
+			n.setStatus("Approved");
+			n.setViewed(false);
+			notdao.createandupdateNotification(n);
 			return new ResponseEntity<Void>(HttpStatus.OK);
 		}
 		else
@@ -95,6 +112,13 @@ public class AdminController
 	@DeleteMapping("job/{id}")
 	public ResponseEntity<Void> deleteJob(@PathVariable("id") int id)
 	{
+		Job b=jobDAO.selectOneJob(id);
+		Notification n=new Notification();
+		n.setBlogTitle(b.getJobTitle());
+		n.setEmailId(b.getEmail());
+		n.setStatus("Rejected");
+		n.setViewed(false);
+		notdao.createandupdateNotification(n);
 	if(jobDAO.deleteJob(id)) {
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}else {
@@ -109,6 +133,12 @@ public class AdminController
 		job.setStatus(true);
 		
 	if(jobDAO.createAndUpdateJob(job)) {
+		Notification n=new Notification();
+		n.setBlogTitle(job.getJobTitle());
+		n.setEmailId(job.getEmail());
+		n.setStatus("Approved");
+		n.setViewed(false);
+		notdao.createandupdateNotification(n);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}else {
 		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);

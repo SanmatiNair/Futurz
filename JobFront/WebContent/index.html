@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
@@ -11,33 +12,67 @@
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.js"></script>
 <script type="text/javascript"
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-route.js"></script>
-	<script type="text/javascript"
+<script type="text/javascript"
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-cookies.js"></script>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<script  type="text/javascript" src="Js/app.js"></script>
-<script  type="text/javascript" src="Js/Controller/RegisterController.js"></script>
-<script  type="text/javascript" src="Js/Service/RegisterService.js"></script>
-<script  type="text/javascript" src="Js/Controller/LoginController.js"></script>
-<script  type="text/javascript" src="Js/Service/LoginService.js"></script>
-<script  type="text/javascript" src="Js/Controller/BlogController.js"></script>
-<script  type="text/javascript" src="Js/Service/BlogService.js"></script>
-<script  type="text/javascript" src="Js/Controller/AdminController.js"></script>
-<script  type="text/javascript" src="Js/Service/AdminService.js"></script>
-<script type="text/javascript" src="Js/Controller/ForumController.js"></script>	
-<script type="text/javascript" src="Js/Service/ForumService.js"></script>
-<script type="text/javascript" src="Js/Controller/JobController.js"></script>	
+<script type="text/javascript" src="Js/app.js"></script>
+<script type="text/javascript" src="Js/Controller/RegisterController.js"></script>
+<script type="text/javascript" src="Js/Service/RegisterService.js"></script>
+<script type="text/javascript" src="Js/Controller/LoginController.js"></script>
+<script type="text/javascript" src="Js/Service/LoginService.js"></script>
+<script type="text/javascript" src="Js/Controller/BlogController.js"></script>
+<script type="text/javascript" src="Js/Service/BlogService.js"></script>
+<script type="text/javascript" src="Js/Controller/AdminController.js"></script>
+<script type="text/javascript" src="Js/Service/AdminService.js"></script>
+<script type="text/javascript" src="Js/Controller/JobController.js"></script>
 <script type="text/javascript" src="Js/Service/JobService.js"></script>
-
-
 <style type="text/css">
 body {
-    background: rgba(59,183,120,1);background: -moz-linear-gradient(left, rgba(59,183,120,1) 47%, rgba(71,196,218,1) 100%);background: -webkit-gradient(left top, right top, color-stop(47%, rgba(59,183,120,1)), color-stop(100%, rgba(71,196,218,1)));background: -webkit-linear-gradient(left, rgba(59,183,120,1) 47%, rgba(71,196,218,1) 100%);background: -o-linear-gradient(left, rgba(59,183,120,1) 47%, rgba(71,196,218,1) 100%);background: -ms-linear-gradient(left, rgba(59,183,120,1) 47%, rgba(71,196,218,1) 100%);background: linear-gradient(to right, rgba(59,183,120,1) 47%, rgba(71,196,218,1) 100%);filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3bb778', endColorstr='#47c4da', GradientType=1 );
-    }
+	background: rgba(59, 183, 120, 1);
+	background: -moz-linear-gradient(left, rgba(59, 183, 120, 1) 47%,
+		rgba(71, 196, 218, 1) 100%);
+	background: -webkit-gradient(left top, right top, color-stop(47%, rgba(59, 183, 120,
+		1)), color-stop(100%, rgba(71, 196, 218, 1)));
+	background: -webkit-linear-gradient(left, rgba(59, 183, 120, 1) 47%,
+		rgba(71, 196, 218, 1) 100%);
+	background: -o-linear-gradient(left, rgba(59, 183, 120, 1) 47%,
+		rgba(71, 196, 218, 1) 100%);
+	background: -ms-linear-gradient(left, rgba(59, 183, 120, 1) 47%,
+		rgba(71, 196, 218, 1) 100%);
+	background: linear-gradient(to right, rgba(59, 183, 120, 1) 47%,
+		rgba(71, 196, 218, 1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3bb778',
+		endColorstr='#47c4da', GradientType=1);
+}
+
+.rw-number-notification {
+	position: absolute;
+	top: -7px;
+	right: -6px;
+	padding: 3px 3px 2px 3px;
+	background-color: red;
+	color: white;
+	font-family: arial;
+	font-weight: bold;
+	font-size: 10px;
+	border-radius: 4px;
+	box-shadow: 1px 1px 1px silver;
+}
+
+.dropdown-content {
+	display: block;
+	position: absolute;
+	background-color: #f9f9f9;
+	min-width: 250px;
+	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+	padding: 12px 16px;
+	z-index: 1;
+}
 </style>
 <title>Insert title here</title>
 </head>
-<body ng-app="myApp"  ng-controller="lcontroller as lc">
+<body ng-app="myApp" ng-controller="lcontroller as lc">
 
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
@@ -80,17 +115,24 @@ body {
 								ng-show="currentuser.role=='Admin'">JobApproval</a></li>
 
 						</ul></li>
-					<li><a class="dropdown dropdown-toggle" data-toggle="dropdown"
-						id="navlistitem">Fourms <span class="caret"></span>
-					</a>
-						<ul class="dropdown-menu">
-							<li><a href="#viewallforums">View Forums</a></li>
-
-							<li><a href="#forum" ng-show="currentuser.role=='Admin'">Add
-									Forum</a></li>
-						</ul></li>
+			
 
 					<li><a href="#login" ng-hide="currentuser.name">login</a></li>
+
+					<li><a class="dropdown dropdown-toggle" data-toggle="dropdown"
+						id="navlistitem"
+						ng-show="currentuser.name&&currentuser.role!='Admin'"><span
+							class="glyphicon glyphicon-bell">{{mnotify.length}}</span> <span
+							class="caret"></span> </a>
+						<ul class="dropdown-menu">
+							<li ng-repeat="noti in mnotify"><a
+								ng-click="lc.editnotify(noti.notificationId)"> <span>{{noti.blogTitle}},Acceptance
+										Statue:{{noti.status}}</span>
+							</a></li>
+						</ul></li>
+
+
+
 					<li><a class="dropdown dropdown-toggle" data-toggle="dropdown"
 						id="navlistitem" ng-show="currentuser.name">{{currentuser.name}}<span
 							class="caret"></span>
