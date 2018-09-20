@@ -1,0 +1,18 @@
+<div class="container" ng-controller="fcontroller as fc">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="col-sm-6 col-md-4">
+				<div class="thumbnail" ng-repeat="f in fc.fcustomer">
+					<h4 class="text-center">
+						<span class="label label-info">{{f.name}}</span>
+					</h4>
+					<img src="Image/image.png" class="img-responsive">
+					<span class="btn btn-danger" ng-show="f.onlinestatus==false">OFFLINE</span>
+					<span class="btn btn-success" ng-show="f.onlinestatus==true">ONLINE</span>
+					<a href='' class="btn btn-primary pull-right">Chat</a>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>

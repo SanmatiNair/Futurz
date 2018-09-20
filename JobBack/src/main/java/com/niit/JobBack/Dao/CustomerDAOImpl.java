@@ -30,16 +30,6 @@ public class CustomerDAOImpl implements CustomerDAO {
 		}
 	}
 
-	public boolean updateCustomer(Customer customer) {
-		try {
-			sf.getCurrentSession().update(customer);
-			return true;
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			return false;
-
-		}
-	}
 
 	public boolean deleteCustomer(String emailId) {
 		try {

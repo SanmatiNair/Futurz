@@ -4,7 +4,6 @@ app.value('bed',{edit:false});
 app.value('jid', {id : 1});
 app.value('foid', {id : 46});
 
-
 app.config(function($routeProvider) {
     $routeProvider
     .when("/", {
@@ -58,6 +57,15 @@ app.config(function($routeProvider) {
 	})
     .when("/register", {
         templateUrl : "register.html"        	
+    })
+    .when("/suggfriend", {
+        templateUrl : "suggfriend.html"        	
+    })
+      .when("/pendfriend", {
+        templateUrl : "pendfriend.html"        	
+    })
+    .when("/showfriend", {
+        templateUrl : "showfriend.html"        	
     });
 }); 
 
@@ -69,10 +77,10 @@ app
 			.$on(
 					'$locationChangeStart',
 					function(event, next, current) {
-						var isLoggedIn = $rootScope.usersingnedin;
+						var isLoggedIn = $cookieStore.get(usersingnedin);
 						var role = $rootScope.currentuser.role;
 						var studPages = [ '/blog', '/viewallblogs',
-								'/viewoneblog', '/viewallforums','/viewmyblog' ]
+								'/viewoneblog', '/viewallforums','/viewmyblog','/pendfriend','/suggfriend','/showfriend' ]
 						var empPages = [ '/viewalljobs', '/viewonejob' ]
 						var compPages = [ '/job' ]
 						var adminPages = [ '/jobapproval',

@@ -17,65 +17,28 @@ import com.niit.JobBack.Dao.CustomerDAO;
 import com.niit.JobBack.model.Customer;
 
 @RestController
-@RequestMapping(value="Customer")
-public class CustomerController 
-{
+@RequestMapping(value = "Customer")
+public class CustomerController {
 	@Autowired
 	CustomerDAO Customerdao;
-	
+
 	@GetMapping
-	public ResponseEntity<List<Customer>> getAllCustomers()
-	{
-		List<Customer> Customer=Customerdao.showallcustomer();
-		if(Customer.isEmpty())
-		{
+	public ResponseEntity<List<Customer>> getAllCustomers() {
+		List<Customer> Customer = Customerdao.showallcustomer();
+		if (Customer.isEmpty()) {
 			return new ResponseEntity<List<Customer>>(HttpStatus.NO_CONTENT);
+		} else {
+			return new ResponseEntity<List<Customer>>(Customer, HttpStatus.OK);
 		}
-		else
-		{
-			return new ResponseEntity<List<Customer>>(Customer,HttpStatus.OK);
-		}		
 	}
-	
-	@GetMapping("/{emailId}")
-	public ResponseEntity<Customer> getOneCustomers(@PathVariable("emailId") String emailId)
-	{
-		System.out.println("hi");
-		Customer Customer=Customerdao.showcustomer(emailId);
-		if(Customer!=null)
-		{
-			return new ResponseEntity<Customer>(Customer,HttpStatus.OK);
-		}
-		else
-		{
-			return new ResponseEntity<Customer>(HttpStatus.NO_CONTENT);
-		}		
-	}
-	
+
 	@PostMapping
-	public ResponseEntity<Void> InsertOrUpdateCustomer(@RequestBody Customer customer)
-	{
+	public ResponseEntity<Void> InsertOrUpdateCustomer(@RequestBody Customer customer) {
 		System.out.println(customer.getEmailId());
 		System.out.println(customer.getPassword());
-		if(Customerdao.addCustomer(customer))
-		{
+		if (Customerdao.addCustomer(customer)) {
 			return new ResponseEntity<Void>(HttpStatus.OK);
-		}
-		else
-		{
-			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
-		}
-	}
-	
-	@DeleteMapping("/{emailId}")
-	public ResponseEntity<Void> DeleteCustomer(@PathVariable("emailId") String emailId)
-	{
-		if(Customerdao.deleteCustomer(emailId))
-		{
-			return new ResponseEntity<Void>(HttpStatus.OK);
-		}
-		else
-		{
+		} else {
 			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 		}
 	}

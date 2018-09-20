@@ -1,4 +1,5 @@
-angular.module('myApp').controller('lcontroller',
+angular.module('myApp').controller(
+		'lcontroller',
 		function($scope, lservice, $location, $rootScope, $cookieStore) {
 			var self = this;
 			self.customer = {
@@ -18,59 +19,66 @@ angular.module('myApp').controller('lcontroller',
 				emailId : ''
 			}
 
+			self.friend = {
+				friendid : '',
+				fromid : '',
+				toid : '',
+				status : ''
+			}
+
 			self.submit = submit;
 			self.logout = logout;
 			self.editnotify = editnotify;
 
-			$rootScope.currentuser = self.customer;
-			
-			
 			function getnotify(emailId) {
 				lservice.getnotify(emailId).then(function(response) {
 					$rootScope.mnotify = response.data;
-					
+
 				}, function(errResponse) {
 					$rootScope.mnotify = null;
 				})
 
 			}
-
 			function editnotify(notificationId) {
 				lservice.editnotify(notificationId).then(function(response) {
 					getnotify($rootScope.currentuser.emailId);
 					alert("you viewed notification")
 				}, function(errResponse) {
 				})
-
 			}
 
 			function loginuser(customer) {
-				lservice.LoginUser(customer).then(function(response) {
-					self.customer = response.data;
-					$rootScope.currentuser = self.customer;
-					$cookieStore.put('currentuser', $rootScope.currentuser);
-					$rootScope.usersingnedin = true;
-					if (self.customer.role == "Student") {
-						getnotify(self.customer.emailId);
-						$location.path("/viewallblogs")
-					}
+				lservice.LoginUser(customer).then(
+						function(response) {
+							self.customer = response.data;
+							email.id = self.customer.emailId;
+							$rootScope.currentuser = self.customer;
+							$cookieStore.put('currentuser',
+									$rootScope.currentuser);
+							$rootScope.usersingnedin = true;
+							$cookieStore.put('usersingnedin',
+									$rootScope.usersingnedin);
 
-					else if (self.customer.role == "Employee") {
-						getnotify(self.customer.emailId);
+							if (self.customer.role == "Student") {
+								getnotify(self.customer.emailId);
+								$location.path("/viewallblogs")
+							}
 
-						$location.path("/viewalljobs")
-					}
+							else if (self.customer.role == "Employee") {
+								getnotify(self.customer.emailId);
 
-					else if (self.customer.role == "Employer") {
-						getnotify(self.customer.emailId);
+								$location.path("/viewalljobs")
+							}
 
-						$location.path("/job")
-					} else
-						$location.path("/blogapproval")
-					alert('Login Successsful');
-				}, function(errResponse) {
-					alert('login UnSuccesssful');
-				})
+							else if (self.customer.role == "Employer") {
+								getnotify(self.customer.emailId);
+								$location.path("/job")
+							} else
+								$location.path("/blogapproval")
+							alert('Login Successsful');
+						}, function(errResponse) {
+							alert('login UnSuccesssful');
+						})
 			}
 
 			function submit() {
@@ -78,11 +86,16 @@ angular.module('myApp').controller('lcontroller',
 			}
 
 			function logout() {
-				self.customer = null;
-				$rootScope.currentuser = null;
-				$cookieStore.remove('currentuser');
-				$cookieStore.remove('notifycurrentuser');
-				$location.path('/');
+				lservice.LogoutUser($rootScope.currentuser.emailId).then(
+						function(response) {
+							$rootScope.currentuser = null;
+							$cookieStore.remove('currentuser');
+							$cookieStore.remove('notifycurrentuser');
+							$location.path('/');
+							alert('logout Successsful');
 
+						}, function(errResponse) {
+							alert('logout UnSuccesssful');
+						})
 			}
 		})

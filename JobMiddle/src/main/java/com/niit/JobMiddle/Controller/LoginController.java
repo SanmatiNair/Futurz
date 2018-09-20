@@ -25,22 +25,22 @@ import com.niit.JobBack.model.Notification;
 public class LoginController {
 	@Autowired
 	CustomerDAO customerdao;
-	
+
 	@Autowired
 	NotificationDAO notdao;
 
 	@PostMapping
-	public ResponseEntity<?> InsertOrUpdateCustomer(@RequestBody Customer customer) 
-	{
+	public ResponseEntity<?> InsertOrUpdateCustomer(@RequestBody Customer customer) {
 		Customer exisitingcustomer = customerdao.showcustomer(customer.getEmailId());
-		if (exisitingcustomer == null) 
-		{
+		if (exisitingcustomer == null) {
 			MyError error = new MyError();
 			error.setErrormessage("invalid emailid pls register");
 			return new ResponseEntity<MyError>(error, HttpStatus.NOT_FOUND);
 		} else {
 			System.out.println(exisitingcustomer.getPassword());
 			if (customer.getPassword().equals(exisitingcustomer.getPassword())) {
+				exisitingcustomer.setOnlinestatus(true);
+				customerdao.addCustomer(exisitingcustomer);
 				return new ResponseEntity<Customer>(exisitingcustomer, HttpStatus.OK);
 			} else {
 				MyError error = new MyError();
@@ -49,22 +49,35 @@ public class LoginController {
 			}
 		}
 	}
-	
+
+	@PostMapping("/logout")
+	public ResponseEntity<Void> logoutUpdateCustomer(@RequestParam("email") String email) {
+		System.out.println(email);
+		Customer exisitingcustomer = customerdao.showcustomer(email);
+		System.out.println(exisitingcustomer.getName());
+		exisitingcustomer.setOnlinestatus(false);
+		if (customerdao.addCustomer(exisitingcustomer)) {
+			return new ResponseEntity<Void>(HttpStatus.OK);
+		} else {
+			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+		}
+	}
+
 	@GetMapping("/notify")
 	public ResponseEntity<List<Notification>> getOneBlog(@RequestParam("email") String email) {
-		List<Notification> n=notdao.SelectAllNotification(email);
+		List<Notification> n = notdao.SelectAllNotification(email);
 		if (n.isEmpty()) {
 			return new ResponseEntity<List<Notification>>(n, HttpStatus.NO_CONTENT);
 		} else {
 			return new ResponseEntity<List<Notification>>(n, HttpStatus.OK);
 		}
 	}
-	
+
 	@GetMapping("/notify/{id}")
 	public ResponseEntity<Void> updatenotify(@PathVariable("id") int id) {
-		Notification note=notdao.selectNotification(id);
+		Notification note = notdao.selectNotification(id);
 		note.setViewed(true);
-	if (!notdao.createandupdateNotification(note)) {
+		if (!notdao.createandupdateNotification(note)) {
 			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 		} else {
 			return new ResponseEntity<Void>(HttpStatus.OK);
