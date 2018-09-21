@@ -93,22 +93,22 @@ public class FriendDaoImpl implements FriendDao {
 		}
 	}
 
-	public Friend selectFriend(int id) 
+	public Friend selectFriend(String ToEmail,String FromEmail) 
 	{
 		try
 		{
-			return (Friend)sf.getCurrentSession().createQuery("from Friend where friendid ="+id).uniqueResult();
+			return (Friend)sf.getCurrentSession().createQuery("from Friend where toid ='"+ToEmail+"' and fromid='"+FromEmail+"'").uniqueResult();
 		}
 		catch (Exception e) {
 			return null;
 		}
 	}
 
-	public boolean deleteFriend(int id) 
+	public boolean deleteFriend(String ToEmail,String FromEmail) 
 	{
 		try
 		{
-			sf.getCurrentSession().delete(selectFriend(id));
+			sf.getCurrentSession().delete(selectFriend(ToEmail,FromEmail));
 			return true;
 		}
 		catch (Exception e) {

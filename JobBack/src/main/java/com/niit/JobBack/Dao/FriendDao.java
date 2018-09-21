@@ -11,6 +11,6 @@ public interface FriendDao
 	List<Customer> selectAllFriend(String email);
 	List<Customer> selectAllPendingFriend(String email);
 	List<Customer> friendSuggetion(String email);
-	Friend selectFriend(int id);
-	boolean deleteFriend(int id);
+	Friend selectFriend(String ToEmail,String FromEmail);
+	boolean deleteFriend(String ToEmail,String FromEmail);
 }

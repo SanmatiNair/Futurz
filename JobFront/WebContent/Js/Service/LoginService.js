@@ -49,12 +49,14 @@ app.factory('lservice',function($http)
     {
         return $http.post(REST_SERVICE_URL1, friend);
     }
-    function update(id) 
+    function update(toemail,fromemail) 
     {
-        return $http.get(REST_SERVICE_URL1+"/"+id);
+    	alert(toemail);
+    	alert(fromemail);
+        return $http.get(REST_SERVICE_URL1+"/update?FromEmail="+toemail+"&ToEmail="+fromemail);
     }
-    function rdelete(id) 
+    function rdelete(toemail,fromemail) 
     {
-        return $http.delete(REST_SERVICE_URL1+"/rdelete/"+id);
+        return $http.delete(REST_SERVICE_URL1+"/rdelete?FromEmail="+toemail+"&ToEmail="+fromemail);
     }
  });

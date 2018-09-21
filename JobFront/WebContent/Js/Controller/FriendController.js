@@ -37,7 +37,6 @@ angular.module('myApp').controller('fcontroller',
 			function getsugg() {
 				lservice.getsugg($rootScope.currentuser.emailId).then(function(response) {
 					self.scustomer = response.data;
-
 				}, function(errResponse) {
 					self.scustomer = null;
 				})
@@ -47,7 +46,6 @@ angular.module('myApp').controller('fcontroller',
 			function getpend() {
 				lservice.getpend($rootScope.currentuser.emailId).then(function(response) {
 					self.pcustomer = response.data;
-
 				}, function(errResponse) {
 					self.pcustomer = null;
 				})
@@ -79,18 +77,19 @@ angular.module('myApp').controller('fcontroller',
 				})
 			}
 			
-			function update(id) {
-				alert(id);
-				lservice.update(id).then(function(response) {
+			function update(email) {
+				lservice.update(email,$rootScope.currentuser.emailId).then(function(response) {
 					alert('Request Approved');
+					$route.reload();
 				}, function(errResponse) {
 					alert('Request Not Sent');
 				})
 			}
 			
-			function rdelete(id) {
-				lservice.rdelete(id).then(function(response) {
+			function rdelete(email) {
+				lservice.rdelete(email,$rootScope.currentuser.emailId).then(function(response) {
 					alert('Request rejected');
+					$route.reload();
 				}, function(errResponse) {
 					alert('Request Not Sent');
 				})

@@ -64,10 +64,10 @@ public class FriendController {
 			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 	}
 	
-	@GetMapping("/{id}")
-	public ResponseEntity<Void> appFriend(@PathVariable("id")int id) 
+	@GetMapping("/update")
+	public ResponseEntity<Void> appFriend(@RequestParam("ToEmail") String toemail,@RequestParam("FromEmail") String fromemail) 
 	{
-		Friend myfriend=frienddao.selectFriend(id);
+		Friend myfriend=frienddao.selectFriend(toemail,fromemail);
 		myfriend.setStatus("Accepted");
 		if(frienddao.createAndUpdateFriend(myfriend))
 			return new ResponseEntity<Void>(HttpStatus.OK);
@@ -75,11 +75,11 @@ public class FriendController {
 			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 	}
 	
-	@DeleteMapping("/rdelete/{id}")
-	public ResponseEntity<Void> delFriend(@PathVariable("id")int id) 
+	@DeleteMapping("/rdelete")
+	public ResponseEntity<Void> delFriend(@RequestParam("ToEmail") String toemail,@RequestParam("FromEmail") String fromemail) 
 	{
 		
-		if(frienddao.deleteFriend(id))
+		if(frienddao.deleteFriend(toemail,fromemail))
 			return new ResponseEntity<Void>(HttpStatus.OK);
 		else
 			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
