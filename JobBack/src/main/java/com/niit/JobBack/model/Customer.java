@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 @Entity
 public class Customer {
@@ -19,6 +20,7 @@ public class Customer {
 	private String phoneNo;
 	private String role;
 	private boolean onlinestatus;
+
 	public String getEmailId() {
 		return emailId;
 	}
@@ -55,5 +57,8 @@ public class Customer {
 	public void setOnlinestatus(boolean onlinestatus) {
 		this.onlinestatus = onlinestatus;
 	}
+	
+	
+	
 
 }

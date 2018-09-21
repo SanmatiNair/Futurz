@@ -8,7 +8,8 @@ angular.module('myApp').controller(
 				password : '',
 				phoneNo : '',
 				onlinestatus : 'false',
-				role : ''
+				role : '',
+				imageurl : ''
 			};
 
 			self.notify = {

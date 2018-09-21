@@ -4,8 +4,11 @@
 
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<!-- <script -->
+<!-- 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
 <script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript"
@@ -16,6 +19,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-cookies.js"></script>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <script type="text/javascript" src="Js/app.js"></script>
 <script type="text/javascript" src="Js/Controller/RegisterController.js"></script>
 <script type="text/javascript" src="Js/Service/RegisterService.js"></script>
@@ -143,16 +147,14 @@ body {
 						</ul></li>
 
 					<li><a class="dropdown dropdown-toggle" data-toggle="dropdown"
-						id="navlistitem" ng-show="currentuser.name&&currentuser.role!='Admin'">Friend
-							<span class="caret"></span>
+						id="navlistitem"
+						ng-show="currentuser.name&&currentuser.role!='Admin'">Friend <span
+							class="caret"></span>
 					</a>
 						<ul class="dropdown-menu">
-							<li><a href="#showfriend">
-									Show Friend</a></li>
-							<li><a href="#pendfriend"
-								>Pending Request</a></li>
-							<li><a href="#suggfriend"
-								>Suggestion</a></li>
+							<li><a href="#showfriend"> Show Friend</a></li>
+							<li><a href="#pendfriend">Pending Request</a></li>
+							<li><a href="#suggfriend">Suggestion</a></li>
 
 						</ul></li>
 
@@ -162,6 +164,8 @@ body {
 							class="caret"></span>
 					</a>
 						<ul class="dropdown-menu">
+							<li><a href="#uploadprofilepic"><img src="http://localhost:8080/JobMiddle/getimage?email={{currentuser.emailId}}"
+									alt="Profile Pic" height="30px" width="30px" style=" border-radius: 50%;"> ChangePic</a></li>
 							<li ng-show="currentuser.name!=''"><a ng-click="lc.logout()">Logout</a></li>
 						</ul></li>
 

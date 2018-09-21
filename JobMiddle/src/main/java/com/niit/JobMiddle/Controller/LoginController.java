@@ -2,6 +2,8 @@ package com.niit.JobMiddle.Controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,7 +32,7 @@ public class LoginController {
 	NotificationDAO notdao;
 
 	@PostMapping
-	public ResponseEntity<?> InsertOrUpdateCustomer(@RequestBody Customer customer) {
+	public ResponseEntity<?> InsertOrUpdateCustomer(@RequestBody Customer customer,HttpSession session) {
 		Customer exisitingcustomer = customerdao.showcustomer(customer.getEmailId());
 		if (exisitingcustomer == null) {
 			MyError error = new MyError();
@@ -41,6 +43,7 @@ public class LoginController {
 			if (customer.getPassword().equals(exisitingcustomer.getPassword())) {
 				exisitingcustomer.setOnlinestatus(true);
 				customerdao.addCustomer(exisitingcustomer);
+				session.setAttribute("mailid",exisitingcustomer.getEmailId());
 				return new ResponseEntity<Customer>(exisitingcustomer, HttpStatus.OK);
 			} else {
 				MyError error = new MyError();
@@ -51,12 +54,14 @@ public class LoginController {
 	}
 
 	@PostMapping("/logout")
-	public ResponseEntity<Void> logoutUpdateCustomer(@RequestParam("email") String email) {
+	public ResponseEntity<Void> logoutUpdateCustomer(@RequestParam("email") String email,HttpSession ss) {
 		System.out.println(email);
 		Customer exisitingcustomer = customerdao.showcustomer(email);
 		System.out.println(exisitingcustomer.getName());
 		exisitingcustomer.setOnlinestatus(false);
 		if (customerdao.addCustomer(exisitingcustomer)) {
+			ss.removeAttribute("mailid");
+			ss.invalidate();
 			return new ResponseEntity<Void>(HttpStatus.OK);
 		} else {
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);

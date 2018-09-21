@@ -6,7 +6,8 @@ angular.module('myApp').controller('rcontroller', function($scope, rservice, $lo
 		password : '',
 		phoneNo : '',
 		onlinestatus : 'false',
-		role : ''
+		role : '',
+		imageurl:''
 	};
 	self.submit = submit;
 
@@ -21,6 +22,7 @@ angular.module('myApp').controller('rcontroller', function($scope, rservice, $lo
 	
 	function submit()
 	{
+		alert(self.customer.imageurl)
 		createuser(self.customer);
 	}
 })

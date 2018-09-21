@@ -34,9 +34,8 @@ public class CustomerController {
 
 	@PostMapping
 	public ResponseEntity<Void> InsertOrUpdateCustomer(@RequestBody Customer customer) {
-		System.out.println(customer.getEmailId());
-		System.out.println(customer.getPassword());
-		if (Customerdao.addCustomer(customer)) {
+		if (Customerdao.addCustomer(customer)) 
+		{
 			return new ResponseEntity<Void>(HttpStatus.OK);
 		} else {
 			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);

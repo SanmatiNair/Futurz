@@ -111,7 +111,4 @@ public class BlogController
 			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 		}
 	}
-	
-	
-
 }
